@@ -1,0 +1,26 @@
+parser: "@typescript-eslint/parser"
+env:
+  browser: true
+  es6: true
+  node: true
+  commonjs: false
+  mocha: true
+globals:
+  setImmediate: "readonly"
+  unescape: "readonly"
+  escape: "readonly"
+  Promise: "readonly"
+extends:
+  - "@ecomfe/eslint-config"
+  - "@ecomfe/eslint-config/typescript"
+plugins:
+  - "@typescript-eslint"
+rules:
+  comma-dangle:
+    - 2
+    - only-multiline
+  no-confusing-arrow: 0
+  "@typescript-eslint/ban-types": 0
+  "@typescript-eslint/no-unused-vars": 1
+  "@typescript-eslint/no-empty-interface": 0
+  "@typescript-eslint/consistent-type-definitions": 0
