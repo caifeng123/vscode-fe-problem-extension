@@ -1,44 +1,9 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
-import * as dayjs from 'dayjs';
 import {api} from '../api';
-import {ApiType, defalutParams} from '../constant';
-
-const getLevel = (level: number) => {
-    let res = '';
-    while (level-- > 0) {
-        res += '★';
-    }
-    return res.padEnd(5, '☆');
-};
-
-const getDescription = ({title = '', level = 0, updateAt = undefined}) =>
-    `${title.slice(0, 10)}${title.length > 10 ? '...' : ''} ${dayjs(
-        updateAt
-    ).format('YYYY-MM-DD')} ${getLevel(level)}`;
+import {ApiType} from '../constant';
+import {getDescription} from '../utils/utils';
 
 export class TagItem extends vscode.TreeItem {
-    iconPath = {
-        light: path.join(
-            __filename,
-            '..',
-            '..',
-            'resources',
-            'light',
-            'dependency.svg'
-        ),
-        dark: path.join(
-            __filename,
-            '..',
-            '..',
-            'resources',
-            'dark',
-            'dependency.svg'
-        ),
-    };
-
-    contextValue = 'dependency';
-    id: string;
     constructor(
         readonly props: Record<string, any>,
         readonly collapsibleState: vscode.TreeItemCollapsibleState
@@ -63,7 +28,7 @@ export class ListItem extends vscode.TreeItem {
         this.description = getDescription(props);
         this.command = {
             title: 'Preview Problem',
-            command: 'fe-problem.previewProblem',
+            command: 'feProblem.previewProblem',
             arguments: [props.exerciseKey],
         };
     }

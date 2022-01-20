@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
         previewProvider,
         vscode.window.registerTreeDataProvider('todoTreeview', treeViewProvider),
         vscode.commands.registerCommand(
-            'fe-problem.previewProblem',
+            'feProblem.previewProblem',
             exerciseKey => previewProvider.getDetail(exerciseKey)
         )
     );

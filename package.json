@@ -80,7 +80,7 @@
                 "title": "Show Problem"
             },
             {
-                "command": "fe-problem.previewProblem",
+                "command": "feProblem.previewProblem",
                 "title": "showPreview"
             },
             {
@@ -219,11 +219,13 @@
         },
         "configuration": [
             {
-                "title": "JSON Outline",
+                "title": "fe-problem",
                 "properties": {
-                    "jsonOutline.autorefresh": {
-                        "type": "boolean",
-                        "default": false
+                    "feProblem.workspaceFolder": {
+                        "type": "string",
+                        "scope": "application",
+                        "description": "The path of the workspace folder to store the problem files.",
+                        "default": ""
                     }
                 }
             }
