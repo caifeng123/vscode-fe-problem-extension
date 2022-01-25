@@ -1,51 +1,20 @@
-# Views & View Containers
+# FeProblem
 
-This sample demonstrates how to implement and contribute a tree view in VS Code. This includes:
+> 在 vscode 中刷 前端面试题
 
-- Contributing views and view containers.
-- Contributing actions in various location of the view.
-- Implementing the tree data provider for the view.
-- Creating and working with the view.
+## 功能
 
-This sample provides following views
+### 选中题目查看预览
 
-- Node dependencies view
-- Ftp file explorer view
+> 初次进入需要选择保存notes的路径
 
-Following example shows Node dependencies view in Package Explorer View container.
+![preview](https://raw.githubusercontent.com/caifeng123/pictures/master/preview.gif)
 
-![Package Explorer](./resources/package-explorer.png)
+### 切换题目状态
 
-## VS Code API
+![切换已做与未做](https://raw.githubusercontent.com/caifeng123/pictures/master/image-20220126003104797.png)
+![addSolved](https://raw.githubusercontent.com/caifeng123/pictures/master/addSolved.gif)
 
-This sample uses following contribution points, activation events and APIs
+### 能够记录历史记录 note
 
-### Contribution Points
-
-- `views`
-- `viewsContainers`
-- `menu`
-  - `view/title`
-  - `view/item/context`
-
-### Activation Events
-
-- `onView:${viewId}`
-
-### APIs
-
-- `window.createTreeView`
-- `window.registerTreeDataProvider`
-- `TreeView`
-- `TreeDataProvider`
-
-Refer to [Usage](./USAGE.md) document for more details.
-
-## Running the Sample
-
-- Open this example in VS Code Insiders
-- `npm install`
-- `npm run watch`
-- `F5` to start debugging
-- Node dependencies view is shown in Package explorer view container in Activity bar.
-- FTP file explorer view should be shown in Explorer
+![](https://raw.githubusercontent.com/caifeng123/pictures/master/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62022-01-26-%E4%B8%8A%E5%8D%8812.17.21.gif)
