@@ -29,6 +29,11 @@ export class NoteProvider {
         // 不用判断有没有 没有就创建，有则不动
         await fse.createFile(finalPath);
 
+        // 若有答案直接填入
+        if (problem.explanation) {
+            await fse.writeFile(finalPath, problem.explanation);
+        }
+
         vscode.window.showTextDocument(
             vscode.Uri.file(finalPath),
             {preview: true, viewColumn: vscode.ViewColumn.Two}

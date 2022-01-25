@@ -86,10 +86,10 @@
         "menus": {
             "view/title": [
                 {
-					"command": "feProblem.refreshTree",
-					"when": "view == todoTreeview || view == solvedTreeview",
-					"group": "navigation"
-				}
+                    "command": "feProblem.refreshTree",
+                    "when": "view == todoTreeview || view == solvedTreeview",
+                    "group": "navigation"
+                }
             ],
             "view/item/context": [
                 {
@@ -134,6 +134,7 @@
         "@babel/eslint-parser": "^7.16.5",
         "@babel/eslint-plugin": "^7.16.5",
         "@ecomfe/eslint-config": "^7.4.0",
+        "@types/fs-extra": "^9.0.13",
         "@types/lodash": "^4.14.178",
         "@types/markdown-it": "^12.2.3",
         "@types/mkdirp": "^0.5.2",

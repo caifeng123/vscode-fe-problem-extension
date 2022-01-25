@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as dayjs from 'dayjs';
-import {IProblem} from '../type';
 
 /**
  * 根据题目难度返回星级

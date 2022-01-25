@@ -1,4 +1,4 @@
-import {ConfigurationTarget, workspace, WorkspaceConfiguration} from 'vscode';
+import {ConfigurationTarget, workspace} from 'vscode';
 
 export interface IDescriptionConfiguration {
     showInComment: boolean;
