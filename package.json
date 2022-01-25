@@ -22,7 +22,7 @@
     "activationEvents": [
         "onView:todoTreeview",
         "onView:solvedTreeview",
-        "onCommand:fe-problem.showProblem"
+        "onCommand:feProblem.codeNow"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -76,12 +76,12 @@
         },
         "commands": [
             {
-                "command": "fe-problem.showProblem",
-                "title": "Show Problem"
-            },
-            {
                 "command": "feProblem.previewProblem",
                 "title": "showPreview"
+            },
+            {
+                "command": "feProblem.codeNow",
+                "title": "codeNow"
             },
             {
                 "command": "nodeDependencies.refreshEntry",
@@ -226,6 +226,12 @@
                         "scope": "application",
                         "description": "The path of the workspace folder to store the problem files.",
                         "default": ""
+                    },
+                    "feProblem.fileMap": {
+                        "type": "object",
+                        "scope": "application",
+                        "description": "map of files,{[id]: {[exerciseKey]: [filePath]}}",
+                        "default": {}
                     }
                 }
             }
@@ -241,6 +247,7 @@
         "@babel/eslint-parser": "^7.16.5",
         "@babel/eslint-plugin": "^7.16.5",
         "@ecomfe/eslint-config": "^7.4.0",
+        "@types/lodash": "^4.14.178",
         "@types/markdown-it": "^12.2.3",
         "@types/mkdirp": "^0.5.2",
         "@types/node": "^12.12.0",
@@ -254,9 +261,11 @@
     "dependencies": {
         "axios": "^0.24.0",
         "dayjs": "^1.10.7",
+        "fs-extra": "^10.0.0",
         "ftp": "^0.3.10",
         "highlight.js": "^11.4.0",
         "jsonc-parser": "^0.4.2",
+        "lodash": "^4.17.21",
         "markdown-it": "^12.3.2",
         "minimist": "^0.2.1",
         "mkdirp": "^0.5.1",

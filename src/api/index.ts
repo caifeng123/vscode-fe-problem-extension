@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
-import {apiMap, ApiType, defalutParams, prefix} from '../constant';
+import {apiMap, defalutParams, prefix} from '../constant';
+import {ApiType} from '../type';
 
 class Api {
     fetch = async (type: ApiType, params: any = {}) => {

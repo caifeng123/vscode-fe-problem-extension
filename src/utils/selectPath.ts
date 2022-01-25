@@ -65,7 +65,7 @@ export class WorkspaceFolderSelect {
      * 选择工作区文件夹，假如已有则直接返回
      */
     selectWorkspaceFolder = async (): Promise<string> => {
-        let workspaceFolderSetting: string = this.workspaceUtil.getWorkspaceFolder();
+        let workspaceFolderSetting: string = this.workspaceUtil.get('workspaceFolder', '');
         if (workspaceFolderSetting.trim() === '') {
             workspaceFolderSetting = await this.determineLeetCodeFolder();
         }
@@ -102,8 +102,8 @@ export class WorkspaceFolderSelect {
         picks.push(
             {
                 label: 'Default location',
-                detail: `${path.join(os.homedir(), 'feProblem')}`,
-                value: `${path.join(os.homedir(), 'feProblem')}`,
+                detail: `${path.join(os.homedir(), '.feProblem')}`,
+                value: `${path.join(os.homedir(), '.feProblem')}`,
             },
             {
                 label: '$(file-directory) Browse...',

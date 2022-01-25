@@ -24,4 +24,3 @@ export const apiMap = {
     tag: 'tag/list',
     detail: 'exercise/practice/detail',
 };
-export type ApiType = keyof typeof apiMap;

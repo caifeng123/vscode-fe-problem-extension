@@ -1,3 +1,4 @@
+import {IProblem} from './../type';
 // Copyright (c) jdneo. All rights reserved.
 // Licensed under the MIT license.
 
@@ -7,21 +8,11 @@ import {markdownEngine} from './engine';
 import {api} from '../api';
 import {markdownCss} from './css';
 
-type ResponseType = {
-    title: string;
-    desc: string;
-    options: string;
-    explanation: string;
-    level: number;
-    createAt: string;
-    updateAt: string;
-};
-
 const codeButton: {element: string, script: string, style: string} = {
     element: '<button id="solve">Code Now</button>',
     script: `const codeButton = document.getElementById('solve');
             codeButton.onclick = () => vscode.postMessage({
-                command: 'ShowProblem',
+                command: 'feProblem.codeNow'
             });`,
     style: `<style>
         #solve {
@@ -77,39 +68,18 @@ const ansButton: {element: string, script: string, style: string} = {
 };
 
 class PreviewProvider extends Webview {
-    protected readonly viewType: string = 'preview';
-    private sideMode = false;
-    private info: ResponseType;
+    private problem: IProblem;
 
-    isSideMode(): boolean {
-        return this.sideMode;
-    }
-
-    async getDetail(exerciseKey: string): Promise<void> {
-        const data = await api.fetch('detail', {exerciseKey});
-        this.show(data.data);
-    }
-
-    show(data: ResponseType, isSideMode = false): void {
-        this.info = data;
-        this.sideMode = isSideMode;
+    async getDetail({exerciseKey, tagName}: Record<string, string>): Promise<void> {
+        const {data} = await api.fetch('detail', {exerciseKey});
+        this.problem = {...data, tagName};
         this.showWebviewInternal();
     }
 
-    protected getWebviewOption(): IWebviewOption {
-        if (!this.sideMode) {
-            return {
-                title: `${this.info.title}: Preview`,
-                viewColumn: ViewColumn.One,
-            };
-        }
-        return {
-            title: 'Description',
-            viewColumn: ViewColumn.Two,
-            preserveFocus: true,
-        };
-
-    }
+    protected getWebviewOption = (): IWebviewOption => ({
+        title: `${this.problem.title}: Preview`,
+        viewColumn: ViewColumn.One,
+    });
 
     protected getWebviewContent(): string {
         return `
@@ -120,8 +90,8 @@ class PreviewProvider extends Webview {
                     http-equiv="Content-Security-Policy" 
                     content="default-src 'none'; img-src https:; 
                     script-src vscode-resource: 'unsafe-inline'; style-src vscode-resource: 'unsafe-inline';"/>
-                ${!this.sideMode ? codeButton.style : ''}
-                ${ansButton.style}
+                    ${codeButton.style}
+                    ${ansButton.style}
                 <style>
                     ${markdownCss}
                     code { white-space: pre-wrap; }
@@ -130,18 +100,18 @@ class PreviewProvider extends Webview {
             </head>
             <body>
                 <h1>问题</h1>
-                <h2>${this.info.title}</h2>
-                ${markdownEngine.render(this.info.desc)}
+                <h2>${this.problem.title}</h2>
+                ${markdownEngine.render(this.problem.desc)}
                 ${ansButton.element}
                 <div id="answer">
                     <h1>答案</h1>
-                    ${markdownEngine.render(this.info.explanation)}
+                    ${markdownEngine.render(this.problem.explanation)}
                 <hr />
                 </div>
-                ${!this.sideMode ? codeButton.element : ''}
+                ${codeButton.element}
                 <script>
                     const vscode = acquireVsCodeApi();
-                    ${!this.sideMode ? codeButton.script : ''}
+                    ${codeButton.script}
                     ${ansButton.script}
                 </script>
             </body>
@@ -151,13 +121,12 @@ class PreviewProvider extends Webview {
 
     protected onDidDisposeWebview(): void {
         super.onDidDisposeWebview();
-        this.sideMode = false;
     }
 
     protected async onDidReceiveMessage(message: IWebViewMessage): Promise<void> {
         switch (message.command) {
-            case 'ShowProblem': {
-                await commands.executeCommand('problem.previewProblem', this.info);
+            case 'feProblem.codeNow': {
+                await commands.executeCommand('feProblem.codeNow', this.problem);
                 break;
             }
         }

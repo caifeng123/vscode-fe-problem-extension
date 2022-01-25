@@ -7,9 +7,9 @@ export interface IDescriptionConfiguration {
 
 export class WorkspaceUtil {
     config: WorkspaceConfiguration;
-    constructor() {
-        this.config = workspace.getConfiguration('feProblem');
+    constructor(path?: string) {
+        this.config = workspace.getConfiguration(path ?? 'feProblem');
     }
-    shouldHideSolvedProblem = () => this.config.get<boolean>('hideSolved', false);
-    getWorkspaceFolder = () => this.config.get<string>('workspaceFolder', '');
+    get = <T>(key: string, defaultValue?: T) => this.config.get<T>(key, defaultValue);
+    set = <T>(key: string, value: T) => this.config.update(key, value);
 }
