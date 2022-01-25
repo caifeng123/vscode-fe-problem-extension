@@ -4,9 +4,6 @@
     "description": "fe problem for interview with note",
     "version": "0.0.1",
     "publisher": "cc123nice",
-    "enabledApiProposals": [
-        "treeViewDragAndDrop"
-    ],
     "private": true,
     "license": "MIT",
     "repository": {
