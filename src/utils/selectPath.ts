@@ -4,57 +4,6 @@ import * as path from 'path';
 import {IQuickItemEx} from '../type';
 import {WorkspaceUtil} from './workspaceUtils';
 
-
-// export const selectWorkspaceFolder = async (): Promise<string> => {
-//     let workspaceFolderSetting: string = getWorkspaceFolder();
-//     if (workspaceFolderSetting.trim() === '') {
-//         workspaceFolderSetting = await determineLeetCodeFolder();
-//         if (workspaceFolderSetting === '') {
-//             // User cancelled
-//             return workspaceFolderSetting;
-//         }
-//     }
-// let needAsk: boolean = true;
-// await fse.ensureDir(workspaceFolderSetting);
-// for (const folder of vscode.workspace.workspaceFolders || []) {
-//     if (isSubFolder(folder.uri.fsPath, workspaceFolderSetting)) {
-//         needAsk = false;
-//     }
-// }
-
-// if (needAsk) {
-//     const choice: string | undefined = await vscode.window.showQuickPick(
-//         [
-//             OpenOption.justOpenFile,
-//             OpenOption.openInCurrentWindow,
-//             OpenOption.openInNewWindow,
-//             OpenOption.addToWorkspace,
-//         ],
-//         {placeHolder: 'The LeetCode workspace folder is not opened in VS Code, would you like to open it?'},
-//     );
-
-//     // Todo: generate file first
-//     switch (choice) {
-//         case OpenOption.justOpenFile:
-//             return workspaceFolderSetting;
-//         case OpenOption.openInCurrentWindow:
-//             await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(workspaceFolderSetting), false);
-//             return '';
-//         case OpenOption.openInNewWindow:
-//             await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(workspaceFolderSetting), true);
-//             return '';
-//         case OpenOption.addToWorkspace:
-//             vscode.workspace.updateWorkspaceFolders(vscode.workspace.workspaceFolders?.length ?? 0, 0, {uri: vscode.Uri.file(workspaceFolderSetting)});
-//             break;
-//         default:
-//             return '';
-//     }
-// }
-
-// return wsl.useWsl() ? wsl.toWslPath(workspaceFolderSetting) : workspaceFolderSetting;
-// };
-
-
 export class WorkspaceFolderSelect {
     workspaceUtil: WorkspaceUtil;
     constructor() {
@@ -130,7 +79,7 @@ export class WorkspaceFolderSelect {
             result = choice.value;
         }
 
-        this.workspaceUtil.config.update('workspaceFolder', result, vscode.ConfigurationTarget.Global);
+        this.workspaceUtil.set('workspaceFolder', result, vscode.ConfigurationTarget.Global);
 
         return result;
     };

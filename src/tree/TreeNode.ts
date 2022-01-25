@@ -20,6 +20,7 @@ export class TagItem extends vscode.TreeItem {
 }
 
 export class ListItem extends vscode.TreeItem {
+    contextValue = 'problem';
     constructor(
         readonly props: Record<string, any>,
         readonly collapsibleState: vscode.TreeItemCollapsibleState
@@ -43,15 +44,16 @@ export const ItemMap = {
     // detail: undefined,
 };
 
-type Provider = ValueOf<typeof ItemMap>;
+export type Provider = ValueOf<typeof ItemMap>;
 
 export class TreeNode
 implements vscode.TreeDataProvider<Provider> {
     treeNodeApi: TreeNodeApi;
     treeType: TreeListType;
     private readonly _onDidChangeTreeData: vscode.EventEmitter<
-	Provider | undefined | void
+    Provider | undefined | void
     > = new vscode.EventEmitter<Provider | undefined | void>();
+    readonly onDidChangeTreeData: vscode.Event<Provider | undefined | void> = this._onDidChangeTreeData.event;
 
     constructor(treeType: TreeListType) {
         this.treeType = treeType;
@@ -66,7 +68,7 @@ implements vscode.TreeDataProvider<Provider> {
         return treeNode;
     };
 
-    refresh(): void {
+    async refresh(): Promise<void> {
         this._onDidChangeTreeData.fire();
     }
 
@@ -77,7 +79,7 @@ implements vscode.TreeDataProvider<Provider> {
     getChildren(element?): vscode.ProviderResult<Provider[]> {
         if (element) {
             return this.createTreeItem(
-                this.treeNodeApi.getSubTreeList(element.id, element.label),
+                this.treeNodeApi.getSubTreeList(this.treeType, element.id, element.label),
                 'list',
                 vscode.TreeItemCollapsibleState.None
             );

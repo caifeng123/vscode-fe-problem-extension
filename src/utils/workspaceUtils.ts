@@ -1,4 +1,4 @@
-import {workspace, WorkspaceConfiguration} from 'vscode';
+import {ConfigurationTarget, workspace, WorkspaceConfiguration} from 'vscode';
 
 export interface IDescriptionConfiguration {
     showInComment: boolean;
@@ -6,10 +6,12 @@ export interface IDescriptionConfiguration {
 }
 
 export class WorkspaceUtil {
-    config: WorkspaceConfiguration;
+    path: string;
     constructor(path?: string) {
-        this.config = workspace.getConfiguration(path ?? 'feProblem');
+        this.path = path ?? 'feProblem';
     }
-    get = <T>(key: string, defaultValue?: T) => this.config.get<T>(key, defaultValue);
-    set = <T>(key: string, value: T) => this.config.update(key, value);
+    get = <T>(key: string, defaultValue?: T) => workspace.getConfiguration(this.path).get<T>(key, defaultValue);
+    set = <T>(key: string, value: T, configurationTarget?: boolean | ConfigurationTarget) =>
+        workspace.getConfiguration(this.path).update(key, value, configurationTarget);
+    has = (key: string) => workspace.getConfiguration(this.path).has(key);
 }

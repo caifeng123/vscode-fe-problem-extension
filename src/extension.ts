@@ -10,15 +10,10 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.window.registerTreeDataProvider('todoTreeview', solveProvider.todoTreeview),
         vscode.window.registerTreeDataProvider('solvedTreeview', solveProvider.solvedTreeview),
-        vscode.commands.registerCommand(
-            'feProblem.previewProblem',
-            props => previewProvider.getDetail(props)
-        ),
-        vscode.commands.registerCommand(
-            'feProblem.codeNow',
-            props => noteProvider.openNote(props)
-        ),
-        vscode.commands.registerCommand('leetcode.addSolved', props => solveProvider.addSolved(props)),
-        vscode.commands.registerCommand('leetcode.removeSolved', props => solveProvider.removeSolved(props)),
+        vscode.commands.registerCommand('feProblem.refreshTree', () => solveProvider.refreash()),
+        vscode.commands.registerCommand('feProblem.previewProblem', props => previewProvider.getDetail(props)),
+        vscode.commands.registerCommand('feProblem.codeNow', props => noteProvider.openNote(props)),
+        vscode.commands.registerCommand('feProblem.addSolved', props => solveProvider.addSolved(props)),
+        vscode.commands.registerCommand('feProblem.removeSolved', props => solveProvider.removeSolved(props))
     );
 }

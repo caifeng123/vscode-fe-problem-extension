@@ -7,6 +7,7 @@ import {IWebviewOption, Webview} from './webview';
 import {markdownEngine} from './engine';
 import {api} from '../api';
 import {markdownCss} from './css';
+import {noteProvider} from '../note';
 
 const codeButton: {element: string, script: string, style: string} = {
     element: '<button id="solve">Code Now</button>',
@@ -74,6 +75,7 @@ class PreviewProvider extends Webview {
         const {data} = await api.fetch('detail', {exerciseKey});
         this.problem = {...data, tagName};
         this.showWebviewInternal();
+        noteProvider.showInitNote(this.problem);
     }
 
     protected getWebviewOption = (): IWebviewOption => ({

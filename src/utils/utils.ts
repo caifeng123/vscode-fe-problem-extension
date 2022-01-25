@@ -50,14 +50,12 @@ export const sub = (str: string, n: number) => {
     }
 };
 
-export const getFileName = ({id, title}) => `${id}.${title}.md`;
-
 /**
  * 获取绝对路径
  * @param workspaceFoldPath workspaceFold路径
  * @param problem 问题
  * @returns 文件绝对路径
  */
-export const getFilePath = (workspaceFoldPath: string, problem: IProblem) => {
-    return path.join(workspaceFoldPath, problem.tagName, getFileName(problem));
+export const getFilePath = (workspaceFoldPath: string, {title, tagName}) => {
+    return path.join(workspaceFoldPath, tagName, `${title}.md`);
 };
