@@ -3,7 +3,7 @@
     "displayName": "fe-problem",
     "description": "fe problem for interview with note",
     "version": "0.0.1",
-    "publisher": "caifeng01",
+    "publisher": "cc123nice",
     "enabledApiProposals": [
         "treeViewDragAndDrop"
     ],
@@ -11,7 +11,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/vscode-extension-samples"
+        "url": "https://github.com/caifeng123/vscode-fe-problem-extension"
     },
     "engines": {
         "vscode": "^1.57.0"
@@ -31,7 +31,7 @@
                 {
                     "id": "package-explorer",
                     "title": "前端面试题",
-                    "icon": "media/dep.svg"
+                    "icon": "resources/dep.svg"
                 }
             ]
         },
@@ -40,13 +40,11 @@
                 {
                     "id": "todoTreeview",
                     "name": "todo",
-                    "icon": "media/dep.svg",
                     "contextualTitle": "todo list"
                 },
                 {
                     "id": "solvedTreeview",
                     "name": "solved",
-                    "icon": "media/dep.svg",
                     "contextualTitle": "solved list"
                 }
             ]
@@ -62,7 +60,7 @@
             },
             {
                 "command": "feProblem.addSolved",
-                "title": "addSolved",
+                "title": "check~",
                 "icon": {
                     "light": "resources/plus.svg",
                     "dark": "resources/plus.svg"
@@ -70,7 +68,7 @@
             },
             {
                 "command": "feProblem.removeSolved",
-                "title": "removeSolved",
+                "title": "redo",
                 "icon": {
                     "light": "resources/minus.svg",
                     "dark": "resources/minus.svg"
